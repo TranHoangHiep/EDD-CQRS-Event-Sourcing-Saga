@@ -2,3 +2,6 @@
 .idea
 product-service.zip
 discovery-server.zip
+docker-data/config docker-data/data docker-data/eventdata
+docker-data
+product-data
