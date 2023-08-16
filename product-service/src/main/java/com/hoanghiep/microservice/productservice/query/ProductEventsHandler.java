@@ -4,11 +4,13 @@ import com.hoanghiep.microservice.productservice.core.data.ProductEntity;
 import com.hoanghiep.microservice.productservice.core.data.ProductRepository;
 import com.hoanghiep.microservice.productservice.core.events.ProductCreatedEvent;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
+@ProcessingGroup("product-group")
 @RequiredArgsConstructor
 public class ProductEventsHandler {
 

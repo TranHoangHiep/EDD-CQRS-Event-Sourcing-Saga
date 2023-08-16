@@ -1,6 +1,9 @@
 package com.hoanghiep.microservice.productservice.command.interceptor;
 
 import com.hoanghiep.microservice.productservice.command.CreateProductCommand;
+import com.hoanghiep.microservice.productservice.core.data.ProductLookupEntity;
+import com.hoanghiep.microservice.productservice.core.data.ProductLookupRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.messaging.MessageDispatchInterceptor;
@@ -13,7 +16,10 @@ import java.util.function.BiFunction;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class CreateProductCommandInterceptor implements MessageDispatchInterceptor<CommandMessage<?>> {
+
+    private final ProductLookupRepository productLookupRepository;
 
     @Nonnull
     @Override
@@ -30,6 +36,11 @@ public class CreateProductCommandInterceptor implements MessageDispatchIntercept
 
                 if (createProductCommand.getTitle() == null || createProductCommand.getTitle().isBlank()) {
                     throw new IllegalArgumentException("Title cannot be empty");
+                }
+
+                ProductLookupEntity productLookupEntity = productLookupRepository.findByProductIdOrTitle(createProductCommand.getProductId(), createProductCommand.getTitle());
+                if (productLookupEntity != null) {
+                    throw new IllegalStateException(String.format("Product with productId %s or title %s already exist", createProductCommand.getProductId(), createProductCommand.getTitle()));
                 }
             }
 
