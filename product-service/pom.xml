@@ -27,7 +27,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-			<version>4.0.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.axonframework/axon-spring-boot-starter -->
