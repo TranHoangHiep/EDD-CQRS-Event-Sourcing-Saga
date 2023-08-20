@@ -5,6 +5,7 @@ import com.hoanghiep.microservice.orderservice.core.data.repo.OrderRepository;
 import com.hoanghiep.microservice.orderservice.core.event.OrderCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+@ProcessingGroup("order-group")
 public class OrderEventHandler {
 
     private final OrderRepository orderRepository;
